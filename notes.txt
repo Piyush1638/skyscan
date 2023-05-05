@@ -1,0 +1,43 @@
+<div className="box-info">
+        {/* <div> */}
+          <div className="media-query-icon d-flex align-items-center">
+            <img
+              src="http://openweathermap.org/img/wn/04n@2x.png"
+              alt="weather icon"
+            />
+            <p className="description">Cloudy</p>
+          </div>
+          <h1 className="temperature">16°</h1>
+          <div className="location-date">
+            <h3 className="location">London</h3>
+            <p className="time">{date.toLocaleTimeString()}</p>
+            <p className="day&date">&nbsp;
+                {date.toLocaleDateString("en-us", {
+                  weekday: "long",
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}
+              </p>
+            
+          </div>
+          {/* <div className="icon">
+            <img
+              src="http://openweathermap.org/img/wn/04n@2x.png"
+              alt="weather icon"
+            />
+            <p className="description">Cloudy</p>
+          </div> */}
+        {/* </div> */}
+
+        {/* <div className="time-date">
+          <h3 className="text-light">
+            {date.toLocaleTimeString("en-us", {
+              weekday: "long",
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
+          </h3>
+        </div> */}
+      </div>

@@ -1,0 +1,11 @@
+@media screen and (max-width: 480px){
+    .hourly-info{
+        text-align: center;
+        font-size: x-small;
+        padding: 0 5px 0 5px;  
+    }
+
+    .container .hourly-info img{
+        height: 40px;
+    }
+}

@@ -1,0 +1,54 @@
+
+.app{
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./assets/images/SAVE_20230501_201918.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center; 
+}
+
+
+
+.box{
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  justify-content: space-between;
+}
+
+.box-left{
+  flex: 0.8;
+  width: 100%;
+  padding: 20px;
+  /* background-color: black; */
+}
+
+
+.box-right{
+  /* background-color: green; */
+  overflow: auto;
+  color: white;
+  height: 93vh;
+  width: 40%;
+  backdrop-filter: blur(8px);
+  
+}
+
+
+
+@media screen and (max-width: 480px) {
+  .box{
+   flex-direction: column;
+   justify-content: flex-start;
+   max-height: 90vh;
+   max-width: 100%;
+  }
+  .box-right{
+   width: 100%;
+    
+  }
+  
+}

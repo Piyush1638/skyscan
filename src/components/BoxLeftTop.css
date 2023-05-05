@@ -1,0 +1,32 @@
+/* .box-left{
+    min-height: 50%;
+} */
+
+/* .box-info{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+} */
+
+/* .box-info h1{
+    font-size: 9rem;
+} */
+
+
+
+@media screen and (max-width: 480px) {
+    .media-query-icon img{
+        height: 50px;
+        width: 50px
+    }
+
+    .box-info h1{
+        font-size: 4rem;
+    }
+
+    .box-info{
+        display: flex;
+        justify-content: center;
+        /* align-items: center; */
+    }
+  }
