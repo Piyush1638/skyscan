@@ -122,9 +122,7 @@ const App = ()=> {
   //     console.log("Day 5",day5)
 
 
-  //     // console.log(data1);
-  //     // console.log(locationWeather)
-  //     // console.log("5 day forecast: ",data2);
+
   //   }
   //   getWeather();
   // }
