@@ -21,7 +21,7 @@
 
    .next-5-days-forecast .container{
          display: flex;
-         justify-content: space-evenly;
+         /* justify-content: space-evenly; */
          align-items: center;
          height: fit-content;
          padding: 5px 3px 15px 3px;

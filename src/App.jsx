@@ -5,43 +5,75 @@ import BoxLeftTop from "./components/BoxLeftTop";
 import BoxRightBottom from "./components/BoxRightBottom";
 import Header from "./components/Header";
 
-const App = ()=> {
-
-
+const App = () => {
   const [locationWeather, setLocationWeather] = useState({});
-  const [latitude, setLatitude] = useState();
-  const [longitude, setLongitude] = useState();
+  const [FutureWeather, setFutureWeather] = useState([]);
+  const [todaysWeather, setTodaysWeather] = useState({});
+  useEffect(() => {
+    getLocation();
+  }, [navigator.geolocation]);
 
-  const [day1, setDay1]= useState({});
-  const [day2, setDay2]= useState({});
-  const [day3, setDay3]= useState({});
-  const [day4, setDay4]= useState({});
-  const [day5, setDay5]= useState({});
-
-
-  useEffect(()=>{
-    getLocation()
-  },[navigator.geolocation])
-
-
-  const getLocation = ()=>{
-    if(navigator.geolocation){
+  const getLocation = () => {
+    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(showPosition, showError);
-    }else{
-      alert("Your browser doesn't support geolocation")
+    } else {
+      alert("Your browser doesn't support geolocation");
     }
-  }
-
+  };
 
   // ShowPosition
-  // const showPosition =(position)=>{
- 
-  // }
+  const showPosition = (position) => {
+    const { latitude, longitude } = position.coords;
+    const getCurrentWeather = async () => {
+      const api_call1 = await fetch(
+        "https://api.openweathermap.org/data/2.5/weather?lat=" +
+          latitude +
+          "&lon=" +
+          longitude +
+          "&appid=35cd382137961ee6440305f74a109a83&units=metric"
+      );
+      return api_call1.json();
+    };
+    const getFutureWeather=async()=>{
+      const api_call2= await fetch(
+        "https://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=35cd382137961ee6440305f74a109a83&units=metric"
+      )
+      return api_call2.json();
+    }
+    const getWeather = async () => {
+      const CurrentWeather = await getCurrentWeather();
+      const currWeather = {
+        temperature: CurrentWeather.main.temp,
+        weather: CurrentWeather.weather[0].main,
+        description: CurrentWeather.weather[0].description,
+        icon: CurrentWeather.weather[0].icon,
+        humidity: CurrentWeather.main.humidity,
+        windSpeed: CurrentWeather.wind.speed,
+        location: CurrentWeather.name,
+        country: CurrentWeather.sys.country,
+      };
+      setTodaysWeather(currWeather);
+      const futureWeather = await getFutureWeather();
 
+      const filtered_data = futureWeather.list
+        .slice(4, 40)
+        .map((item, index) => {
+          return {
+            index: index,
+            time: item.dt_txt.split(" ")[1].slice(0, 5),
+            temp: item.main.temp,
+            icon: item.weather[0].icon,
+            weather: item.weather[0].main,
+          };
+        });
+      setFutureWeather(filtered_data);
+    };
+    getWeather();
+  };
 
-  // Handle Error 
-  const showError = (error)=>{
-    switch(error.code){
+  // Handle Error
+  const showError = (error) => {
+    switch (error.code) {
       case error.PERMISSION_DENIED:
         alert("Your have denied the request for geolocation");
         break;
@@ -55,35 +87,35 @@ const App = ()=> {
         alert("An unknown error has occured");
         break;
     }
-  }
+  };
   return (
     <div className="app">
-     <Header/>
+      <Header />
       <div className="box">
         <div className="box-left">
           <BoxLeftTop
-            location={locationWeather.location}
-            country={locationWeather.country}
-            temperature={locationWeather.temperature}
-            weather={locationWeather.weather}
+            temperature={todaysWeather.temperature}
+            weather={todaysWeather.weather}
+            // description={todaysWeather.description}
+            icon={todaysWeather.icon}
+            // humidity={todaysWeather.humidity}
+            // windSpeed={todaysWeather.windSpeed}
+            location={todaysWeather.location}
+            country={todaysWeather.country}
           />
         </div>
         <div className="box-right">
           <BoxRightBottom
-            day1={day1}
-            day2={day2}
-            day3={day3}
-            day4={day4}
-            day5={day5}
-            weather={locationWeather.weather}
-            description={locationWeather.description}
-            humidity={locationWeather.humidity}
-            windSpeed={locationWeather.windSpeed}
+            futureWeather={FutureWeather}
+            weather={todaysWeather.weather}
+            description={todaysWeather.description}
+            humidity={todaysWeather.humidity}
+            windSpeed={todaysWeather.windSpeed}
           />
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default App;

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./BoxRightBottom.css";
 import HourlyInfo from "./HourlyInfo";
 
-const BoxRightBottom = ({ weather, description, humidity, windSpeed, day1,day2, day3, day4, day5}) => {
+const BoxRightBottom = ({ weather, description, humidity, windSpeed, futureWeather}) => {
 
 
   return (
@@ -26,56 +26,26 @@ const BoxRightBottom = ({ weather, description, humidity, windSpeed, day1,day2, 
 
       <div className="next-5-days-forecast pt-3">
         <h3>5 Day Forcast</h3>
-        <div className="container">
-          <HourlyInfo time={3.0} />
-          <HourlyInfo time={6.0} />
-          <HourlyInfo time={9.0} />
-          <HourlyInfo time={12.0} />
-          <HourlyInfo time={15.0} />
-          <HourlyInfo time={18.0} />
-          <HourlyInfo time={21.0} />
-        </div>
-
-        <div className="container">
-          <HourlyInfo time={3.0} />
-          <HourlyInfo time={6.0} />
-          <HourlyInfo time={9.0} />
-          <HourlyInfo time={12.0} />
-          <HourlyInfo time={15.0} />
-          <HourlyInfo time={18.0} />
-          <HourlyInfo time={21.0} />
-        </div>
-
-        <div className="container">
-          <HourlyInfo time={3.0} />
-          <HourlyInfo time={6.0} />
-          <HourlyInfo time={9.0} />
-          <HourlyInfo time={12.0} />
-          <HourlyInfo time={15.0} />
-          <HourlyInfo time={18.0} />
-          <HourlyInfo time={21.0} />
-        </div>
-
-        <div className="container">
-          <HourlyInfo time={3.0} />
-          <HourlyInfo time={6.0} />
-          <HourlyInfo time={9.0} />
-          <HourlyInfo time={12.0} />
-          <HourlyInfo time={15.0} />
-          <HourlyInfo time={18.0} />
-          <HourlyInfo time={21.0} />
-        </div>
-
-        <div className="container">
-          <HourlyInfo time={3.0} />
-          <HourlyInfo time={6.0} />
-          <HourlyInfo time={9.0} />
-          <HourlyInfo time={12.0} />
-       
-        </div>
+        <DaywiseBlock Data={futureWeather.slice(0,8)} key={1}  />
+        <DaywiseBlock Data={futureWeather.slice(8,16)}  key={2} />
+        <DaywiseBlock Data={futureWeather.slice(16,24)} key={3} />
+        <DaywiseBlock Data={futureWeather.slice(24,32)} key={4} />
+        <DaywiseBlock Data={futureWeather.slice(32,40)}  key={5} />
       </div>
     </div>
   );
 };
 
 export default BoxRightBottom;
+
+const DaywiseBlock=({Data})=>{
+  return(
+  <div className="container" >
+  {
+    Data.map((item)=>(
+      <HourlyInfo key={item.index} time={item.time} temp={item.temp} weather={item.weather} icon={item.icon} />
+    ))
+  }
+  </div>
+  )
+}

@@ -1,16 +1,16 @@
 import React from "react";
 import "./HourlyInfo.css"
 
-const HourlyInfo = ({time,weather,temp}) => {
+const HourlyInfo = ({time,weather,temp,icon}) => {
   return (
     <div className="hourly-info">
       <div>
         {temp && (
           <p className="forecast-temp">{temp}C</p>
         )}
-        <img src="http://openweathermap.org/img/wn/04d@2x.png" alt="icon" />
+        <img src={`http://openweathermap.org/img/wn/${icon}@2x.png`} alt="icon" />
         <p className="weather">{weather}</p>
-        <p className="forecast-time">{time.toFixed(2)}</p>
+        <p className="forecast-time">{time}</p>
         {time>12 ? (
           <p className="meridian">PM</p>
         ):(
