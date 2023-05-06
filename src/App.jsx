@@ -61,6 +61,7 @@ const App = () => {
           return {
             index: index,
             time: item.dt_txt.split(" ")[1].slice(0, 5),
+            date: item.dt_txt.slice(0,11),
             temp: item.main.temp,
             icon: item.weather[0].icon,
             weather: item.weather[0].main,
