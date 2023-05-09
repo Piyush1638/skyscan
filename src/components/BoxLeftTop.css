@@ -1,23 +1,25 @@
-/* .box-left{
-    min-height: 50%;
-} */
+.box-info h1{
+    font-size: 6rem;
+}
 
-/* .box-info{
+.box-info{
     display: flex;
     justify-content: center;
-    align-items: center;
-} */
+    color: azure;
+    font-size: 2rem;
+    /* align-items: center; */
+}
 
-/* .box-info h1{
-    font-size: 9rem;
-} */
+.box-info .country-location h3{
+    font-family:monospace;
+}
 
 
 
 @media screen and (max-width: 480px) {
-    .media-query-icon img{
-        height: 50px;
-        width: 50px
+    .box-info .weather-icon img{
+        height: 80px;
+        width: 80px
     }
 
     .box-info h1{
