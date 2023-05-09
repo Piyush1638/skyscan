@@ -1,0 +1,33 @@
+.Loading{
+    height: 50%;
+    width: 50%;
+    background-color: rgba(22, 19, 19, 0.75);
+    margin: auto;
+    margin-top: 200px;
+}
+
+.Loading img{
+    height: 150px;
+    width: 150px;
+}
+
+.Loading .permission-info h3{
+    color: aliceblue;
+}
+
+.Loading .permission-info p{
+    color: rgb(160, 166, 168);
+    display: flex;
+    width: 60%;
+    text-align: center;
+}
+
+
+@media screen and (max-width: 680px) {
+   .Loading {
+    height: 80vh;
+    width: 80vw;
+    margin-top: 100px;
+   }
+    
+  }

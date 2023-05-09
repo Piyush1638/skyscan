@@ -1,14 +1,33 @@
-// import { useState } from "react";
 import { useEffect, useState } from "react";
 import "./App.css";
 import BoxLeftTop from "./components/BoxLeftTop";
 import BoxRightBottom from "./components/BoxRightBottom";
 import Header from "./components/Header";
+import PopUp from "./components/PopUp";
+import Loading from "./components/Loading";
+import { getCurrentForecast } from "./fetcher/getCurrentForecast";
+import { getFutureForecast } from "./fetcher/getFutureForecast";
+import { searchedLocationFutureWeather } from "./fetcher/searchedLocationFutureWeather";
+import { searchedLocationCurrentWeather } from "./fetcher/searchedLocationCurrentWeather";
 
 const App = () => {
-  const [locationWeather, setLocationWeather] = useState({});
   const [FutureWeather, setFutureWeather] = useState([]);
   const [todaysWeather, setTodaysWeather] = useState({});
+  const [detecting ,setDetecting] = useState(true);
+
+  if(detecting){
+    <Loading/>
+  }
+
+const getSearchLocationData= async(data)=>{
+  setDetecting(true);
+  const searchedFutureData=await searchedLocationFutureWeather(data);
+  const searchedCurrentData=await searchedLocationCurrentWeather(data);
+  setTodaysWeather(searchedCurrentData)
+  setFutureWeather(searchedFutureData)
+  setDetecting(false)
+  };
+  
   useEffect(() => {
     getLocation();
   }, [navigator.geolocation]);
@@ -22,55 +41,15 @@ const App = () => {
   };
 
   // ShowPosition
-  const showPosition = (position) => {
+  const showPosition = async (position) => {
     const { latitude, longitude } = position.coords;
-    const getCurrentWeather = async () => {
-      const api_call1 = await fetch(
-        "https://api.openweathermap.org/data/2.5/weather?lat=" +
-          latitude +
-          "&lon=" +
-          longitude +
-          "&appid=35cd382137961ee6440305f74a109a83&units=metric"
-      );
-      return api_call1.json();
-    };
-    const getFutureWeather=async()=>{
-      const api_call2= await fetch(
-        "https://api.openweathermap.org/data/2.5/forecast?lat="+latitude+"&lon="+longitude+"&appid=35cd382137961ee6440305f74a109a83&units=metric"
-      )
-      return api_call2.json();
-    }
-    const getWeather = async () => {
-      const CurrentWeather = await getCurrentWeather();
-      const currWeather = {
-        temperature: CurrentWeather.main.temp,
-        weather: CurrentWeather.weather[0].main,
-        description: CurrentWeather.weather[0].description,
-        icon: CurrentWeather.weather[0].icon,
-        humidity: CurrentWeather.main.humidity,
-        windSpeed: CurrentWeather.wind.speed,
-        location: CurrentWeather.name,
-        country: CurrentWeather.sys.country,
-      };
-      setTodaysWeather(currWeather);
-      const futureWeather = await getFutureWeather();
-
-      const filtered_data = futureWeather.list
-        .slice(4, 40)
-        .map((item, index) => {
-          return {
-            index: index,
-            time: item.dt_txt.split(" ")[1].slice(0, 5),
-            temp: item.main.temp,
-            icon: item.weather[0].icon,
-            weather: item.weather[0].main,
-          };
-        });
-      setFutureWeather(filtered_data);
-    };
-    getWeather();
+    const CurrentWeather = await getCurrentForecast(latitude,longitude);
+    setTodaysWeather(CurrentWeather);
+    const futureWeather = await getFutureForecast(latitude,longitude);
+    setFutureWeather(futureWeather);
+    // console.log(futureWeather)
+    setDetecting(false);
   };
-
   // Handle Error
   const showError = (error) => {
     switch (error.code) {
@@ -90,7 +69,9 @@ const App = () => {
   };
   return (
     <div className="app">
-      <Header />
+     {detecting ?(<Loading/>):(
+      <div>
+      <Header getSearchLocationData={getSearchLocationData} />
       <div className="box">
         <div className="box-left">
           <BoxLeftTop
@@ -103,10 +84,12 @@ const App = () => {
             location={todaysWeather.location}
             country={todaysWeather.country}
           />
+
         </div>
         <div className="box-right">
           <BoxRightBottom
             futureWeather={FutureWeather}
+            getSearchLocationData={getSearchLocationData} 
             weather={todaysWeather.weather}
             description={todaysWeather.description}
             humidity={todaysWeather.humidity}
@@ -114,6 +97,10 @@ const App = () => {
           />
         </div>
       </div>
+
+      <PopUp/>
+    </div>
+     )}
     </div>
   );
 };

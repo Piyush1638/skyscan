@@ -1,9 +1,10 @@
 import React from "react";
 import "./HourlyInfo.css"
 
-const HourlyInfo = ({time,weather,temp,icon}) => {
+const HourlyInfo = ({date,time,weather,temp,icon}) => {
   return (
     <div className="hourly-info">
+      <p>{date}</p>
       <div>
         {temp && (
           <p className="forecast-temp">{temp}C</p>

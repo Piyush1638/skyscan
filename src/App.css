@@ -7,9 +7,16 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center; 
+  overflow: hidden;
 }
 
-
+.country-location{
+  align-items: center;
+  gap: 1rem;
+}
+.country,.location{
+  margin-bottom: 0!important;
+}
 
 .box{
   display: flex;
@@ -17,6 +24,8 @@
   background-size: cover;
   background-repeat: no-repeat;
   justify-content: space-between;
+  min-height: 100dvh;
+  min-height: 100vh;
 }
 
 .box-left{
@@ -28,18 +37,42 @@
 
 
 .box-right{
+  position: absolute;
+  right: 0;
+  top: 0;
   /* background-color: green; */
   overflow: auto;
   color: white;
-  height: 93vh;
+  max-height: 100dvh;
+  max-height: 100vh;
   width: 40%;
   backdrop-filter: blur(8px);
   
 }
 
 
+.box-right {
+  scrollbar-width: auto;
+  /* scrollbar-color: #fff #000000; */
+}
+.box-right::-webkit-scrollbar {
+  width: 3px;
+}
 
-@media screen and (max-width: 480px) {
+.box-right::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.box-right::-webkit-scrollbar-thumb {
+  background-color: #00000095;
+  border-radius: 2px;
+  border: 2px solid #ffffff9d;
+}
+*{
+  -webkit-tap-highlight-color: transparent;
+}
+
+@media screen and (max-width: 680px) {
   .box{
    flex-direction: column;
    justify-content: flex-start;
@@ -48,7 +81,7 @@
   }
   .box-right{
    width: 100%;
-    
+    position: static;
   }
   
 }
