@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./BoxLeftTop.css";
 import PopUp from "./PopUp";
 
-const BoxLeftTop = ({ location, country, temperature, weather, icon }) => {
+const BoxLeftTop = ({ location, country, temperature, weather, icon, message }) => {
   return (
     <div className="box-info d-flex flex-column">
       <div className="country-location d-flex ">
@@ -17,7 +17,9 @@ const BoxLeftTop = ({ location, country, temperature, weather, icon }) => {
           alt="weather icon"
         />
       </div>
-      <PopUp/>
+      <PopUp
+        message={message}
+      />
     </div>
   );
 };

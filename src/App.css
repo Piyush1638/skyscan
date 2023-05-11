@@ -1,12 +1,12 @@
 
 .app{
-  width: 100vw;
-  height: 100vh;
-  background-image: url("./assets/images/SAVE_20230501_201918.jpg");
-  background-size: cover;
+  /* width: 100vw;
+  height: 100vh; */
+  /* background-image: url("./assets/images/SAVE_20230501_201918.jpg"); */
+  /* background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center; 
+  background-position: center;  */
   overflow: hidden;
 }
 
@@ -40,13 +40,14 @@
   position: absolute;
   right: 0;
   top: 0;
-  /* background-color: green; */
+  background-color: #0000005f;
   overflow: auto;
   color: white;
   max-height: 100dvh;
   max-height: 100vh;
   width: 40%;
   backdrop-filter: blur(8px);
+
   
 }
 

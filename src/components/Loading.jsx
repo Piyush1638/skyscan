@@ -1,6 +1,6 @@
 import React from "react";
 import "./Loading.css";
-import detecting from "../assets/images/WeatherIcons.gif";
+const detecting = "/images/WeatherIcons.gif";
 
 const Loading = () => {
   return (

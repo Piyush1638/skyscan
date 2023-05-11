@@ -1,20 +1,11 @@
 import React from 'react'
 import "./PopUp.css";
 
-const PopUp = () => {
+const PopUp = ({message}) => {
     let weather="Rainy";
-    let suggestion="";
-     const user={
-        name:"Rainy",
-        Display:"Have a glass of Wine"
-
-     }
-     if(user.name==weather){
-        suggestion=user.Display;
-     }
   return (
     <div className='pop-up'>
-        <em>{suggestion}</em>
+        <em>{message}</em>
     </div>
   )
 }

@@ -15,7 +15,7 @@ const Header = ({getSearchLocationData}) => {
   return (
     <div className="header">
       <nav className="navbar navbar-expand-lg navbar-light bg-transparent p-2">
-        <h1 className="navbar-brand text-light">SKYSCAN</h1>
+        <h1 className="logo navbar-brand text-light">SKYSCAN</h1>
         <form className="search" onSubmit={submit}>
           <input
             type="text"
