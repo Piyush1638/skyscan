@@ -4,6 +4,7 @@
 }
 
 
+
 nav .search{
     display: none;
     align-items: center;
@@ -15,7 +16,7 @@ nav .search{
 
 
 nav .search .search-input{
-    background: none;
+    background: none;   
     border: none;
     outline: none;
     padding: 5px;
@@ -25,5 +26,9 @@ nav .search .search-input{
 @media screen and (max-width: 540px) {
    nav .search{
     display: flex;
+   }
+
+   h1.logo{
+    font-size: 14px;
    }
 }
