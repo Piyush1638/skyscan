@@ -4,6 +4,7 @@ export const searchedLocationFutureWeather =  async (location) => {
         `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=35cd382137961ee6440305f74a109a83&units=metric`
       );
       const data= await response.json() || "skyscan"  ;
+      if(data.cod === "404") alert("Please enter a valid city name");
       return data.list
         .slice(4,40)
         .map((item, index) => {
