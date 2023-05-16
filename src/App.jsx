@@ -27,7 +27,7 @@ const App = () => {
   const [FutureWeather, setFutureWeather] = useState([]);
   const [todaysWeather, setTodaysWeather] = useState({});
   const [detecting, setDetecting] = useState(true);
-  // const [recommendation, setRecommendation] = useState("chill");
+
   let recommendation = "";
   const getBackgroundImage = () => {
     if (todaysWeather.weather) {
@@ -87,7 +87,6 @@ const App = () => {
   useEffect(() => {
     getLocation();
   }, [navigator.geolocation]);
-  // console.log(recommendation, ' rec')
 
   const getLocation = () => {
     if (navigator.geolocation) {
@@ -104,9 +103,10 @@ const App = () => {
     setTodaysWeather(CurrentWeather);
     const futureWeather = await getFutureForecast(latitude, longitude);
     setFutureWeather(futureWeather);
-    // console.log(futureWeather)
     setDetecting(false);
   };
+
+  
   // Handle Error
   const showError = (error) => {
     switch (error.code) {
